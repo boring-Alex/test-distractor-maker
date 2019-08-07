@@ -1,9 +1,9 @@
-quest<-read.table("C:\\Users\\SasMi\\Documents\\OneDrive\\Аккредитационный симулятор\\Тестовые задания\\Новые тесты\\Тесты с правильным ответом\\questions.txt", sep="\t", header=T)
-distract<-read.table("C:\\Users\\SasMi\\Documents\\OneDrive\\Аккредитационный симулятор\\Тестовые задания\\Новые тесты\\Неправильные ответы\\Answers.txt", sep="\t", header=T, row.names=1)
+quest<-read.table("C:\\%USERNAME%\\questions.txt", sep="\t", header=T)
+distract<-read.table("C:\\%USERNAME%\\Answers.txt", sep="\t", header=T, row.names=1)
 y=3
 x=1
 a=0
-pb <- winProgressBar(title = "Заполнение", min = 0, max = nrow(quest)*3, width = 300)
+pb <- winProgressBar(title = "Processing", min = 0, max = nrow(quest)*3, width = 300)
 r=sample(1:nrow(distract), 1)
 while(x<=nrow(quest) & a<=nrow(quest)*3){
 	if(y==3){
@@ -41,8 +41,8 @@ while(x<=nrow(quest) & a<=nrow(quest)*3){
 				r=sample(1:nrow(distract), 1)}
 		}
 	}else{}
-setWinProgressBar(pb, a, title=paste(round(a/(nrow(quest)*3) * 100, 0), "% выполнено"))
+setWinProgressBar(pb, a, title=paste(round(a/(nrow(quest)*3) * 100, 0), "% completed"))
 a=a+3
 }
 close(pb)
-write.table(quest,"C:\\Users\\SasMi\\Documents\\OneDrive\\Аккредитационный симулятор\\Тестовые задания\\Новые тесты\\Вывод\\Result1.txt", sep="\t")
+write.table(quest,"C:\\%USERNAME%\\Result1.txt", sep="\t")
