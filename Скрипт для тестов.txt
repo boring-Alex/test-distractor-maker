@@ -1,0 +1,48 @@
+quest<-read.table("C:\\Users\\SasMi\\Documents\\OneDrive\\Аккредитационный симулятор\\Тестовые задания\\Новые тесты\\Тесты с правильным ответом\\questions.txt", sep="\t", header=T)
+distract<-read.table("C:\\Users\\SasMi\\Documents\\OneDrive\\Аккредитационный симулятор\\Тестовые задания\\Новые тесты\\Неправильные ответы\\Answers.txt", sep="\t", header=T, row.names=1)
+y=3
+x=1
+a=0
+pb <- winProgressBar(title = "Заполнение", min = 0, max = nrow(quest)*3, width = 300)
+r=sample(1:nrow(distract), 1)
+while(x<=nrow(quest) & a<=nrow(quest)*3){
+	if(y==3){
+		repeat{
+			if(rownames(distract)[r]!=quest[x,2] & distract[r,2]==quest[x,6]){
+				quest[x,y]<-rownames(distract)[r]
+				y1=y
+				y=y+1
+				break
+				}else{
+				r=sample(1:nrow(distract), 1)}
+		}
+			}else{}
+	r=sample(1:nrow(distract), 1)
+	if(y==4){
+		repeat{
+			if(rownames(distract)[r]!=quest[x,y1] & rownames(distract)[r]!=quest[x,2] & distract[r,2]==quest[x,6]){
+				quest[x,y]<-rownames(distract)[r]
+				y2=y
+				y=y+1
+				break
+				}else{
+				r=sample(1:nrow(distract), 1)}
+		}
+	}else{}
+	r=sample(1:nrow(distract), 1)
+		if(y==5){
+		repeat{
+			if(rownames(distract)[r]!=quest[x,2] & rownames(distract)[r]!=quest[x,y1] & rownames(distract)[r]!=quest[x,y2] & distract[r,2]==quest[x,6]){
+				quest[x,y]<-rownames(distract)[r]
+				x=x+1
+				y=3
+				break
+				}else{
+				r=sample(1:nrow(distract), 1)}
+		}
+	}else{}
+setWinProgressBar(pb, a, title=paste(round(a/(nrow(quest)*3) * 100, 0), "% выполнено"))
+a=a+3
+}
+close(pb)
+write.table(quest,"C:\\Users\\SasMi\\Documents\\OneDrive\\Аккредитационный симулятор\\Тестовые задания\\Новые тесты\\Вывод\\Result1.txt", sep="\t")
